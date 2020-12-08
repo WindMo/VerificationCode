@@ -27,13 +27,15 @@ public class LoginController {
     @RequestMapping("/login")
     public String loginPage(Map<String,Object> map) {
 
+
         return "login";
     }
 
     @RequestMapping("/toLogin")
     public String toLogin(@Validated User user, HttpSession session, Model model) {
 
-        log.info("欲登入：{}", user == null ? "null" : user.toString());
+        log.info("欲登入者：{}", user == null ? "null" : user.toString());
+        // 简单验证
         User admin = new User("admin","123456");
         if (admin.equals(user)) {
 
