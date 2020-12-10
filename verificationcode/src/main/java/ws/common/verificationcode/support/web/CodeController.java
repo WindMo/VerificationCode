@@ -1,14 +1,12 @@
-package ws.common.verificationcode.web;
+package ws.common.verificationcode.support.web;
 
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.imageio.ImageIO;
@@ -24,21 +22,20 @@ import java.io.IOException;
  */
 
 @Slf4j
-@Controller
 public class CodeController {
 
     @Autowired
-    private Producer kaptchaProducer;
-    @GetMapping("/kaptcha")
+    private Producer producer;
+    @GetMapping("/verifyCode")
     public void getKaptchaImage(HttpSession session, HttpServletResponse response) throws IOException {
 
         // 设置响应头
         setHeaders(response);
         //生成验证码
-        String capText = kaptchaProducer.createText();
+        String capText = producer.createText();
         log.info("当前验证码：{}",capText);
         //向客户端写出
-        BufferedImage bi = kaptchaProducer.createImage(capText);
+        BufferedImage bi = producer.createImage(capText);
         try (ServletOutputStream out = response.getOutputStream()){
 
             ImageIO.write(bi, "jpg", out);
