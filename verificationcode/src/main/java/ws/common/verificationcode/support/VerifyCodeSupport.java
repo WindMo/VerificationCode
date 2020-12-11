@@ -22,9 +22,16 @@ public class VerifyCodeSupport implements ImportBeanDefinitionRegistrar {
     public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
 
         Assert.state(importingClassMetadata.hasAnnotation(EnableVerifyCode.class.getName()),"必须通过<EnableVerifyCode>注解引入");
+        registerProducerBeanDefinitions(importingClassMetadata,registry);
+        registerWebBeanDefinitions(importingClassMetadata,registry);
     }
 
-    private void registerProducerBeanDefinnition(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
+    /**
+     * 注册{@link VerifyCodeProducer}相关bean
+     * @param importingClassMetadata {@link EnableVerifyCode}注解作用目标注解的相关信息
+     * @param registry {@link BeanDefinition}注册器器
+     */
+    private void registerProducerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
 
         MergedAnnotation<EnableVerifyCode> enableVerifyCodeMergedAnnotation = importingClassMetadata.getAnnotations().get(EnableVerifyCode.class);
         String sessionKey = enableVerifyCodeMergedAnnotation.getString("sessionKey");
@@ -36,7 +43,12 @@ public class VerifyCodeSupport implements ImportBeanDefinitionRegistrar {
         registry.registerBeanDefinition(producerClass.getName(),producerBeanDefinition);
     }
 
-    private void registerWebBeanDefinnition(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
+    /**
+     * 注册验证码相关的web层的bean
+     * @param importingClassMetadata {@link EnableVerifyCode}注解作用目标注解的相关信息
+     * @param registry {@link BeanDefinition}注册器器
+     */
+    private void registerWebBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
 
         String controllerClassName = CodeController.class.getName();
         registry.registerBeanDefinition(controllerClassName,new RootBeanDefinition(controllerClassName));

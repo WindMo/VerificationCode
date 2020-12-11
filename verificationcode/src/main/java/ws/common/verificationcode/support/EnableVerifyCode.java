@@ -17,6 +17,6 @@ import java.lang.annotation.*;
 @Documented
 public @interface EnableVerifyCode {
 
-    String seesionKey() default com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
+    String sessionKey() default ConstantVerifyCode.VERIFY_CODE_SESSION_KEY;
     Class<? extends VerifyCodeProducer> producer() default DefaultVerifyCodeProducer.class;
 }

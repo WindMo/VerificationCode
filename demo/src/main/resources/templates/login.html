@@ -7,10 +7,12 @@
 <body>
 <!--  省略前端校验  -->
 <h3>${msg!''}</h3>
-    <form action="/demo/toLogin">
+    <form action="/demo/toLogin" method="post">
+        <IMG src="/demo/verifyCode">
         <input type="text" name="username" placeholder="username"/>
         <input type="password" name="password" placeholder="password"/>
-        <input type="submit"/>
+        <input type="text" name="verifyCode" placeholder="验证码"/>
+        <input type="submit" value="登录"/>
     </form>
 </body>
 </html>
