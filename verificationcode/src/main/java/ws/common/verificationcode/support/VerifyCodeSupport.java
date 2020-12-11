@@ -22,7 +22,6 @@ public class VerifyCodeSupport implements ImportBeanDefinitionRegistrar {
     public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
 
         Assert.state(importingClassMetadata.hasAnnotation(EnableVerifyCode.class.getName()),"必须通过<EnableVerifyCode>注解引入");
-
     }
 
     private void registerProducerBeanDefinnition(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
