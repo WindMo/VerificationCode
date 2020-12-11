@@ -5,7 +5,7 @@ package ws.common.verificationcode.support;
  * @date 2020/12/10
  * @since
  */
-public class ConstantVerifyCode {
+public class ConstantOfVerifyCode {
 
     public static final String VERIFY_CODE_SESSION_KEY = com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
 }

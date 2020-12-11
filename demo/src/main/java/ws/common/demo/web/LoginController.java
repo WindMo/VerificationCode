@@ -3,13 +3,12 @@ package ws.common.demo.web;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import ws.common.demo.pojo.User;
-import ws.common.verificationcode.support.ConstantVerifyCode;
+import ws.common.verificationcode.support.ConstantOfVerifyCode;
 
 import javax.servlet.http.HttpSession;
 import java.util.Objects;
@@ -44,7 +43,7 @@ public class LoginController {
      */
     @RequestMapping("/toLogin")
     public String toLogin(@Validated User user, String verifyCode,
-                          @SessionAttribute(value = ConstantVerifyCode.VERIFY_CODE_SESSION_KEY, required = false) String relVerifyCode,
+                          @SessionAttribute(value = ConstantOfVerifyCode.VERIFY_CODE_SESSION_KEY, required = false) String relVerifyCode,
                           HttpSession session, Model model) {
 
         log.info("欲登入者：{} 输入的验证码：{}", user == null ? "null" : user.toString(), verifyCode);
